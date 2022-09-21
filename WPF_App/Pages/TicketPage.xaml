@@ -1,0 +1,21 @@
+﻿<Page x:Class="WPF_App.Pages.TicketPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_App.EPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="550"
+      Title="TicketPage">
+
+    <Grid Background="Snow">
+        <Label Content="Tickets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold">
+        </Label>
+        <ScrollViewer Margin="0 50 0 50">
+            <StackPanel x:Name="TicketButtonPanel">
+            </StackPanel>
+        </ScrollViewer>
+        <Button Content="Close" Height="40" Width="80" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                FontSize="15" Margin="0 0 5 5" Click="MainMenu"></Button>
+    </Grid>
+</Page>

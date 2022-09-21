@@ -1,0 +1,21 @@
+﻿<Page x:Class="WPF_App.Pages.ExaminationResultPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_App.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="550"
+      Title="ExaminationResultPage">
+
+    <Grid>
+        <Label FontSize="30" HorizontalAlignment="Center" Content="Result"></Label>
+        <StackPanel Margin="40">
+            <Label FontSize="20">Correct Answer</Label>
+            <TextBlock x:Name="CorrectAnswerCount" FontSize="20" Text="0"></TextBlock>
+            <Label FontSize="20"> Qustions Count</Label>
+            <TextBlock x:Name="QuestionsCount" FontSize="20" Text="0"></TextBlock>
+            <Button Click="MenuButtonClick" Width="300" Height="30" Content="Menu" FontSize="16"/>
+        </StackPanel>
+    </Grid>
+</Page>
