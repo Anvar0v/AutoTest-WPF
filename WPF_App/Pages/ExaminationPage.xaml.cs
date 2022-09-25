@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,6 +16,7 @@ public partial class ExaminationPage : Page
 {
     public Ticket currentTicket;
     private int currrentQuestionIndex;
+
     public ExaminationPage(int? currentTicketIndex = null)
     {
         InitializeComponent();
@@ -90,7 +92,7 @@ public partial class ExaminationPage : Page
             button.Background = new SolidColorBrush(Colors.Snow);
             button.Click += ChoiceButtonClick;
 
-            if (choices[i].isSelected)
+            if (currentTicket.isChoiceCompleted(currrentQuestionIndex, i))
             {
                 if (choices[i].Answer)
                 {
@@ -112,26 +114,39 @@ public partial class ExaminationPage : Page
 
     private void ChoiceButtonClick(object sender, RoutedEventArgs e)
     {
-        if (currentTicket.Questions[currrentQuestionIndex].isCompleted) return;
+        if (currentTicket.isQuestionCompleted(currrentQuestionIndex)) return;
         var button = sender as Button;
         var choice = (Choice)button.Tag;
+
         if (choice.Answer)
         {
             button.Background = new SolidColorBrush(Colors.LightGreen);
             (QuestionIndexButtonPanel.Children[currrentQuestionIndex] as Button)!.Background = new SolidColorBrush(Colors.LightGreen);
             currentTicket.CorrectAnswerCount++;
+            MainWindow.Instance.CorrectCount++;
         }
         else
         {
             button.Background = new SolidColorBrush(Colors.Red);
             (QuestionIndexButtonPanel.Children[currrentQuestionIndex] as Button)!.Background = new SolidColorBrush(Colors.Red);
         }
-        choice.isSelected = true;
-        currentTicket.Questions[currrentQuestionIndex].isCompleted = true;
 
-        currentTicket.SelectedQuestionIndex.Add(currrentQuestionIndex);
+
+        //ticket data is handled here;
+        currentTicket.SelectedQuestionIndex.Add(new TicketData(currrentQuestionIndex, choice.Index));
+
         if (currentTicket.SelectedQuestionIndex.Count == currentTicket.QuestionsCount)
         {
+            var ticketRepository = MainWindow.Instance.TicketRepository;
+            var isTicketCompleted = ticketRepository.UserTickets.Any(ut => ut.Index == currentTicket.Index);
+            if (isTicketCompleted)
+            {
+                var oldTicket = ticketRepository.UserTickets
+                    .First(ut => ut.Index == currentTicket.Index);
+
+                ticketRepository.UserTickets.Remove(oldTicket);
+            }
+            ticketRepository.UserTickets.Add(currentTicket);
             MainWindow.Instance.MainWindowFrame.Navigate(new ExaminationResultPage(currentTicket));
         }
     }
@@ -141,12 +156,21 @@ public partial class ExaminationPage : Page
         for (int i = 0; i < currentTicket.QuestionsCount; i++)
         {
             var button = new Button();
+            if (i == 0)
+            {
+                button.Style = FindResource("CurrentQuestionIndexButtonStyle") as Style;
+            }
+            else
+            {
+                button.Style = FindResource("DefaultQuestionIndexButtonStyle") as Style;
+            }
             button.Height = 30;
             button.Width = 30;
             button.Content = i + 1;
             button.FontSize = 16;
             button.Tag = i;
             button.BorderBrush = new SolidColorBrush(Colors.Teal);
+            button.Background = new SolidColorBrush(Colors.Snow);
             QuestionIndexButtonPanel.Children.Add(button);
             button.Click += QuestionIndexButtonsClick;
         }
@@ -155,7 +179,13 @@ public partial class ExaminationPage : Page
     private void QuestionIndexButtonsClick(object sender, RoutedEventArgs e)
     {
         var button = sender as Button;
-        currrentQuestionIndex = (int)button.Tag;
+        button.Style = FindResource("CurrentQuestionIndexButtonStyle") as Style;
+
+        var oldButton = QuestionIndexButtonPanel.Children[currrentQuestionIndex] as Button;
+        oldButton.Style = FindResource("DefaultQuestionIndexButtonStyle") as Style;
+        currrentQuestionIndex = (int)button.Tag; 
+        //if the user clicks any question index button, it then navigates the user to exact question depending on the index that is coming fro the tag;
+
         ShowQuestion();
     }
 

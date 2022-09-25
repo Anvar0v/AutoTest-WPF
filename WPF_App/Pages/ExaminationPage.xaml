@@ -8,7 +8,22 @@
       d:DesignHeight="600" d:DesignWidth="550"
       Title="ExaminationPage">
 
+    <Page.Resources>
+        <Style x:Key="CurrentQuestionIndexButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="BorderBrush" Value="Yellow"/>
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="Margin" Value="0  0 3 0 "/>
+        </Style>
+        <Style x:Key="DefaultQuestionIndexButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="Snow">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="60"/>
@@ -16,6 +31,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+        
         <StackPanel Grid.Row="0">
             <Label Name="Title" Content="Examination" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="DemiBold"></Label>
         </StackPanel>
@@ -32,18 +48,19 @@
         </StackPanel>
         <StackPanel Grid.Row="3">
 
-            <TextBlock TextWrapping="Wrap" x:Name="QuestionText" FontSize="16" FontWeight="DemiBold" 
+            <TextBlock TextWrapping="Wrap" x:Name="QuestionText" FontSize="14" FontWeight="DemiBold" 
                        HorizontalAlignment="Center" Foreground="Black" Background="Snow" Width="400"/>
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="150">
-                <StackPanel x:Name="ChoicesPanel">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="165" VerticalAlignment="Top">
+                <StackPanel x:Name="ChoicesPanel" VerticalAlignment="Center" HorizontalAlignment="Center">
                 </StackPanel>
             </ScrollViewer>
             
         </StackPanel>
-        <StackPanel Grid.Row="4">
+        <DockPanel Grid.Row="4">
             <Button  Content="Close" Height="40" Width="85" FontSize="16" 
-                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 5 5 0" Click="Menu">
+                     HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 5 5 0" Click="Menu" BorderBrush="Teal">
             </Button>
-        </StackPanel>
+
+        </DockPanel>
     </Grid>
 </Page>

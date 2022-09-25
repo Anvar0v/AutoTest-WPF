@@ -8,14 +8,15 @@
       d:DesignHeight="650" d:DesignWidth="550"
       Title="ExaminationResultPage">
 
-    <Grid>
+    <Grid Background="Snow">
+        <StackPanel x:Name="ResultPanel" Margin="40">
         <Label FontSize="30" HorizontalAlignment="Center" Content="Result"></Label>
-        <StackPanel Margin="40">
+        
             <Label FontSize="20">Correct Answer</Label>
             <TextBlock x:Name="CorrectAnswerCount" FontSize="20" Text="0"></TextBlock>
             <Label FontSize="20"> Qustions Count</Label>
             <TextBlock x:Name="QuestionsCount" FontSize="20" Text="0"></TextBlock>
-            <Button Click="MenuButtonClick" Width="300" Height="30" Content="Menu" FontSize="16"/>
+            <Button Click="MenuButtonClick" Width="300" Height="30" Content="Menu" FontSize="16" BorderBrush="Teal"/>
         </StackPanel>
     </Grid>
 </Page>

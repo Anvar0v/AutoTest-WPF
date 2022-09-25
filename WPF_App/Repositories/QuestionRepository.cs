@@ -12,7 +12,7 @@ namespace WPF_App.Repositories;
 public class QuestionRepository
 {
     public List<QuestionEntity> Questions {get ;set;}
-    public int TicketQuestionsCount = 5;
+    public int TicketQuestionsCount = 10;
 
     public QuestionRepository()
     {

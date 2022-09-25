@@ -9,13 +9,13 @@
       Title="TicketPage">
 
     <Grid Background="Snow">
-        <Label Content="Tickets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold">
+        <Label Content="Tickets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="DemiBold">
         </Label>
-        <ScrollViewer Margin="0 50 0 50">
+        <ScrollViewer Margin="0 34 0 50">
             <StackPanel x:Name="TicketButtonPanel">
             </StackPanel>
         </ScrollViewer>
         <Button Content="Close" Height="40" Width="80" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                FontSize="15" Margin="0 0 5 5" Click="MainMenu"></Button>
+                FontSize="15" Margin="0 0 5 5" Click="MainMenu" BorderBrush="Teal"></Button>
     </Grid>
 </Page>

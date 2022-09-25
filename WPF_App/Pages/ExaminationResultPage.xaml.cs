@@ -14,20 +14,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_App.Models;
 
-namespace WPF_App.Pages
-{
-    public partial class ExaminationResultPage : Page
-    {
-        public ExaminationResultPage(Ticket ticket)
-        {
-            InitializeComponent();
-            CorrectAnswerCount.Text = ticket.CorrectAnswerCount.ToString();
-            QuestionsCount.Text = ticket.QuestionsCount.ToString();
-        }
+namespace WPF_App.Pages;
 
-        private void MenuButtonClick(object sender, RoutedEventArgs e)
-        {
-            MainWindow.Instance.DisplayPage(EPages.EPage.MainMenu);
-        }
+public partial class ExaminationResultPage : Page
+{
+    public ExaminationResultPage(Ticket ticket)
+    {
+        InitializeComponent();
+        CorrectAnswerCount.Text = ticket.CorrectAnswerCount.ToString();
+        QuestionsCount.Text = ticket.QuestionsCount.ToString();
+    }
+
+    private void MenuButtonClick(object sender, RoutedEventArgs e)
+    {
+        MainWindow.Instance.DisplayPage(EPages.EPage.MainMenu);
     }
 }

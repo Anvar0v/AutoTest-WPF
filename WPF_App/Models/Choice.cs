@@ -10,6 +10,6 @@ public class Choice
 {
     public string Text { get; set; }
     public bool Answer { get; set; }
-    public bool isSelected { get; set; }
+    public int Index { get; set; }
 
 }

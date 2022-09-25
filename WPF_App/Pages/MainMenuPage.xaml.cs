@@ -24,6 +24,14 @@ namespace WPF_App.Pages
         public MainMenuPage()
         {
             InitializeComponent();
+            var completedQuestionsCount = MainWindow.Instance.TicketRepository.UserTickets.Sum(t => t.CorrectAnswerCount);
+            var totalQuestionsCount = MainWindow.Instance.QuestionRepository.Questions.Count;
+            QuestionStatus.Content = $"{completedQuestionsCount}/{totalQuestionsCount}";
+
+
+            var completedTicketsCount = MainWindow.Instance.TicketRepository.UserTickets.Count(t => t.TicketCompleted);
+            var totalTicketQuestionCount = MainWindow.Instance.QuestionRepository.GetTicketsCount();
+            TicketStatus.Content = $"{completedTicketsCount}/{totalTicketQuestionCount}";
         }
         
         private void TicketButtonClick(object sender, RoutedEventArgs e)

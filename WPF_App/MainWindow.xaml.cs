@@ -9,11 +9,14 @@ public partial class MainWindow : Window
 {
     public static MainWindow Instance;
     public QuestionRepository QuestionRepository;
+    public TicketRepository TicketRepository;
+    public int CorrectCount;
     public MainWindow()
     {
         InitializeComponent();
         Instance = this;
         QuestionRepository = new QuestionRepository();
+        TicketRepository = new TicketRepository();
         MainWindowFrame.Navigate(new MainMenuPage()); 
     }
 
@@ -27,5 +30,8 @@ public partial class MainWindow : Window
         }
     }
 
-   
+    private void Exit(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        TicketRepository.WriteToJson();
+    }
 }
